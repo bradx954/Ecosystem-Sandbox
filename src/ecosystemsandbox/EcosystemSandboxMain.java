@@ -34,14 +34,14 @@ public class EcosystemSandboxMain extends java.awt.Frame {
         this.ecosystem.getSpecimens().stream().forEach((specimen) -> {
             this.listSpecimens.add(specimen.getClass().getSimpleName()+": "+Integer.toString(specimen.getID()));
         });
-        this.ecosystem.newSpecimens.stream().forEach((specimen) -> {
+        this.ecosystem.getNewSpecimens().stream().forEach((specimen) -> {
             try {
                 this.listNewSpecimens.add(specimen.getClass().getSimpleName()+": "+Integer.toString(specimen.getID()));
             } catch (NullPointerException ex) {
                 Logger.getLogger(Ecosystem.class.getName()).log(Level.SEVERE, "Ignored empty species.", ex);
             }
         });
-        this.ecosystem.deadSpecimens.stream().forEach((specimen) -> {
+        this.ecosystem.getDeadSpecimens().stream().forEach((specimen) -> {
             try {
                 this.listDeadSpecimens.add(specimen.getClass().getSimpleName()+": "+Integer.toString(specimen.getID()));
             } catch (NullPointerException ex) {
@@ -363,7 +363,7 @@ public class EcosystemSandboxMain extends java.awt.Frame {
     private void listNewSpecimensItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_listNewSpecimensItemStateChanged
         int specimenID = Integer.parseInt(this.listNewSpecimens.getSelectedItem().toString().split(": ")[1]);
         Species selected = null;
-        for(Species specimen : this.ecosystem.newSpecimens)
+        for(Species specimen : this.ecosystem.getNewSpecimens())
         {
             if(specimenID == specimen.getID())
             {
@@ -377,7 +377,7 @@ public class EcosystemSandboxMain extends java.awt.Frame {
     private void listDeadSpecimensItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_listDeadSpecimensItemStateChanged
         int specimenID = Integer.parseInt(this.listDeadSpecimens.getSelectedItem().toString().split(": ")[1]);
         Species selected = null;
-        for(Species specimen : this.ecosystem.deadSpecimens)
+        for(Species specimen : this.ecosystem.getDeadSpecimens())
         {
             if(specimenID == specimen.getID())
             {

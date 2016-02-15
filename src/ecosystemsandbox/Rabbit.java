@@ -43,17 +43,17 @@ public class Rabbit extends Species implements Cloneable {
             while (calories > 0) {
                 Plant prey = null;
                 for (Species target : this.environment.getSpecimens()) {
-                    if (target.getClass() == Plant.class && this.environment.deadSpecimens.contains(target) == false) {
+                    if (target.getClass() == Plant.class && this.environment.getDeadSpecimens().contains(target) == false) {
                         prey = (Plant) target;
                         if (this.toxinresistance * this.Mass >= prey.getToxicity() * prey.getMass()) {
-                            synchronized (this.environment.deadSpecimens) {
-                                this.environment.deadSpecimens.add(prey);
+                            synchronized (this.environment.getDeadSpecimens()) {
+                                this.environment.getDeadSpecimens().add(prey);
                                 calories -= prey.getMass();
                             }
                         } else {
-                            synchronized (this.environment.deadSpecimens) {
-                                if (!this.environment.deadSpecimens.contains(prey)) {
-                                    this.environment.deadSpecimens.add(prey);
+                            synchronized (this.environment.getDeadSpecimens()) {
+                                if (!this.environment.getDeadSpecimens().contains(prey)) {
+                                    this.environment.getDeadSpecimens().add(prey);
                                     return false;
                                 }
                             }

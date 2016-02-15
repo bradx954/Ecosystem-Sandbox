@@ -24,8 +24,8 @@ public class Ecosystem {
     private int nextID = 1; //The next id to give to a new specimen.
     private int ticks = 0;
     private Collection<Species> Specimens = new ArrayList<Species>(); //The collection of specimens residing in the ecosystem.
-    Collection<Species> newSpecimens = new ArrayList<Species>(); //The new specimens generated after each tick.
-    Collection<Species> deadSpecimens = new ArrayList<Species>(); //The specimens marked for deletion after each tick.
+    private Collection<Species> newSpecimens = new ArrayList<Species>(); //The new specimens generated after each tick.
+    private Collection<Species> deadSpecimens = new ArrayList<Species>(); //The specimens marked for deletion after each tick.
     /**
      * Instantiates the ecosystem taking the m2 size of the ecosystem and the the height of the atmosphere m.
      * @param Area m2 of land for ecosystem.
@@ -147,5 +147,15 @@ public class Ecosystem {
     public int getTicks() {
         return ticks;
     }
+
+    public Collection<Species> getNewSpecimens() {
+        return newSpecimens;
+    }
+
+    public Collection<Species> getDeadSpecimens() {
+        return deadSpecimens;
+    }
+    
+    
     
 }

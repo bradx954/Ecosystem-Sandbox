@@ -29,10 +29,25 @@ public class EcosystemSandboxMain extends java.awt.Frame {
     private void updateList()
     {
         this.listSpecimens.removeAll();
-        for(Species specimen : this.ecosystem.getSpecimens())
-        {
+        this.listNewSpecimens.removeAll();
+        this.listDeadSpecimens.removeAll();
+        this.ecosystem.getSpecimens().stream().forEach((specimen) -> {
             this.listSpecimens.add(specimen.getClass().getSimpleName()+": "+Integer.toString(specimen.getID()));
-        }
+        });
+        this.ecosystem.newSpecimens.stream().forEach((specimen) -> {
+            try {
+                this.listNewSpecimens.add(specimen.getClass().getSimpleName()+": "+Integer.toString(specimen.getID()));
+            } catch (NullPointerException ex) {
+                Logger.getLogger(Ecosystem.class.getName()).log(Level.SEVERE, "Ignored empty species.", ex);
+            }
+        });
+        this.ecosystem.deadSpecimens.stream().forEach((specimen) -> {
+            try {
+                this.listDeadSpecimens.add(specimen.getClass().getSimpleName()+": "+Integer.toString(specimen.getID()));
+            } catch (NullPointerException ex) {
+                Logger.getLogger(Ecosystem.class.getName()).log(Level.SEVERE, "Ignored empty species.", ex);
+            }
+        });
     }
     private void updateLabels()
     {
@@ -53,7 +68,6 @@ public class EcosystemSandboxMain extends java.awt.Frame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        listSpecimens = new java.awt.List();
         plDetails = new java.awt.Panel();
         lblEcosystem = new java.awt.Label();
         lblArea = new java.awt.Label();
@@ -74,6 +88,10 @@ public class EcosystemSandboxMain extends java.awt.Frame {
         lblClone = new javax.swing.JLabel();
         btnCycle = new java.awt.Button();
         txtDetails = new java.awt.TextArea();
+        tabSpecimens = new javax.swing.JTabbedPane();
+        listSpecimens = new java.awt.List();
+        listNewSpecimens = new java.awt.List();
+        listDeadSpecimens = new java.awt.List();
         menuBar1 = new java.awt.MenuBar();
         File = new java.awt.Menu();
         newSpecimen = new java.awt.MenuItem();
@@ -86,18 +104,6 @@ public class EcosystemSandboxMain extends java.awt.Frame {
                 exitForm(evt);
             }
         });
-
-        listSpecimens.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                listSpecimensItemStateChanged(evt);
-            }
-        });
-        listSpecimens.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                listSpecimensActionPerformed(evt);
-            }
-        });
-        add(listSpecimens, java.awt.BorderLayout.CENTER);
 
         plDetails.setLayout(new java.awt.GridBagLayout());
 
@@ -247,6 +253,38 @@ public class EcosystemSandboxMain extends java.awt.Frame {
         txtDetails.setEditable(false);
         add(txtDetails, java.awt.BorderLayout.EAST);
 
+        tabSpecimens.setPreferredSize(new java.awt.Dimension(300, 143));
+
+        listSpecimens.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                listSpecimensItemStateChanged(evt);
+            }
+        });
+        listSpecimens.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listSpecimensActionPerformed(evt);
+            }
+        });
+        tabSpecimens.addTab("Specimens", listSpecimens);
+
+        listNewSpecimens.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                listNewSpecimensItemStateChanged(evt);
+            }
+        });
+        tabSpecimens.addTab("New", listNewSpecimens);
+
+        listDeadSpecimens.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                listDeadSpecimensItemStateChanged(evt);
+            }
+        });
+        tabSpecimens.addTab("Dead", listDeadSpecimens);
+
+        add(tabSpecimens, java.awt.BorderLayout.CENTER);
+        tabSpecimens.getAccessibleContext().setAccessibleName("Specimens");
+        tabSpecimens.getAccessibleContext().setAccessibleDescription("Specimens");
+
         File.setLabel("File");
 
         newSpecimen.setActionCommand("newSpecimen");
@@ -322,6 +360,34 @@ public class EcosystemSandboxMain extends java.awt.Frame {
         this.ecosystem.setClone(this.slidClone.getValue());
     }//GEN-LAST:event_slidCloneStateChanged
 
+    private void listNewSpecimensItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_listNewSpecimensItemStateChanged
+        int specimenID = Integer.parseInt(this.listNewSpecimens.getSelectedItem().toString().split(": ")[1]);
+        Species selected = null;
+        for(Species specimen : this.ecosystem.newSpecimens)
+        {
+            if(specimenID == specimen.getID())
+            {
+                selected = specimen;
+                break;
+            }
+        }
+        this.txtDetails.setText(selected.toString());
+    }//GEN-LAST:event_listNewSpecimensItemStateChanged
+
+    private void listDeadSpecimensItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_listDeadSpecimensItemStateChanged
+        int specimenID = Integer.parseInt(this.listDeadSpecimens.getSelectedItem().toString().split(": ")[1]);
+        Species selected = null;
+        for(Species specimen : this.ecosystem.deadSpecimens)
+        {
+            if(specimenID == specimen.getID())
+            {
+                selected = specimen;
+                break;
+            }
+        }
+        this.txtDetails.setText(selected.toString());
+    }//GEN-LAST:event_listDeadSpecimensItemStateChanged
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -344,11 +410,14 @@ public class EcosystemSandboxMain extends java.awt.Frame {
     private java.awt.Label lblTemperatureValue;
     private javax.swing.JLabel lblTicks;
     private javax.swing.JLabel lblTicksValue;
+    private java.awt.List listDeadSpecimens;
+    private java.awt.List listNewSpecimens;
     private java.awt.List listSpecimens;
     private java.awt.MenuBar menuBar1;
     private java.awt.MenuItem newSpecimen;
     private java.awt.Panel plDetails;
     private javax.swing.JSlider slidClone;
+    private javax.swing.JTabbedPane tabSpecimens;
     private java.awt.TextArea txtDetails;
     // End of variables declaration//GEN-END:variables
 }

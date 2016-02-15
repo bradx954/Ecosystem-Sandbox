@@ -84,7 +84,7 @@ public class Rabbit extends Species implements Cloneable {
         if (new Random().nextInt(this.mutation) == 0) {
             switch (new Random().nextInt(2)) {
                 case 0:
-                    int randomNum = new Random().nextInt(10) - 5;
+                    int randomNum = new Random().nextInt((int) (this.Mass/10)) - (int) (this.Mass/5);
                     if (this.Mass + randomNum > 0) {
                         this.Mass += randomNum;
                     }

@@ -25,7 +25,7 @@ public class Plant extends Species implements Cloneable {
     public Plant(Ecosystem enviroment) {
         this.environment = enviroment;
         this.mutation = 10;
-        this.Mass = 50;
+        this.Mass = 500;
         this.toxicity = 0;
     }
 
@@ -56,7 +56,7 @@ public class Plant extends Species implements Cloneable {
         if (new Random().nextInt(this.mutation) == 0) {
             switch (new Random().nextInt(2)) {
                 case 0:
-                    int randomNum = new Random().nextInt(10) - 5;
+                    int randomNum = new Random().nextInt((int) (this.Mass/10)) - (int) (this.Mass/5);
                     if (this.Mass + randomNum > 0) {
                         this.Mass += randomNum;
                     }

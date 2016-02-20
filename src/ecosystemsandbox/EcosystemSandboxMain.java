@@ -361,7 +361,7 @@ public class EcosystemSandboxMain extends java.awt.Frame {
     }//GEN-LAST:event_slidCloneStateChanged
 
     private void listNewSpecimensItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_listNewSpecimensItemStateChanged
-        int specimenID = Integer.parseInt(this.listNewSpecimens.getSelectedItem().toString().split(": ")[1]);
+        int specimenID = Integer.parseInt(this.listNewSpecimens.getSelectedItem().split(": ")[1]);
         Species selected = null;
         for(Species specimen : this.ecosystem.getNewSpecimens())
         {

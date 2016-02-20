@@ -133,6 +133,7 @@ public class Plant extends Species implements Cloneable {
      *
      * @return
      */
+    @Override
     public int getToxicity() {
         return toxicity;
     }

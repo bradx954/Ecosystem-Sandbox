@@ -20,6 +20,7 @@ public class EcosystemSandboxNewSpecimen extends java.awt.Dialog {
         this.ecosystem = ecosystem;
         this.cbSpecies.addItem(Plant.class.getSimpleName());
         this.cbSpecies.addItem(Rabbit.class.getSimpleName());
+        this.cbSpecies.addItem(Fox.class.getSimpleName());
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -69,6 +70,9 @@ public class EcosystemSandboxNewSpecimen extends java.awt.Dialog {
                 break;
             case "Rabbit":
                 newSpecies = new Rabbit(this.ecosystem);
+                break;
+            case "Fox":
+                newSpecies = new Fox(this.ecosystem);
                 break;
             default:
         }

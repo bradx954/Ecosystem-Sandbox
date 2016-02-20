@@ -30,6 +30,7 @@ public abstract class Species {
     }
     abstract public double getMass();
     abstract public boolean eat();
+    abstract public int getToxicity();
     protected abstract Object clone1() throws CloneNotSupportedException;
 
     public Object copy() throws CloneNotSupportedException {

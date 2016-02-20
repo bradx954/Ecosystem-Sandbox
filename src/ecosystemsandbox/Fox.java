@@ -6,31 +6,31 @@ package ecosystemsandbox;
 import java.util.Random;
 
 /**
- * Class for the rabbit specimen.
+ * Class for the fox specimen.
  *
  * @author Brad Baago
  */
-public class Rabbit extends Species implements Cloneable {
+public class Fox extends Species implements Cloneable {
 
-    private Ecosystem environment; //The environment this rabbit lives in.
-    private int mutation; //The mutation rate of the rabbit.
-    private double Mass; //The mass of the rabbit.
-    private int toxinresistance; //The toxin resistance of the rabbit.
+    private Ecosystem environment; //The environment this fox lives in.
+    private int mutation; //The mutation rate of the fox.
+    private double Mass; //The mass of the fox.
+    private int toxinresistance; //The toxin resistance of the fox.
 
     /**
-     * Instantiates a rabbit in the given environment.
+     * Instantiates a fox in the given environment.
      *
      * @param enviroment
      */
-    public Rabbit(Ecosystem enviroment) {
+    public Fox(Ecosystem enviroment) {
         this.environment = enviroment;
         this.mutation = 10;
-        this.Mass = 6000;
+        this.Mass = 10000;
         this.toxinresistance = 1;
     }
 
     /**
-     * Checks to see if the rabbit survived the round.
+     * Checks to see if the fox survived the round.
      *
      * @return
      */
@@ -41,10 +41,10 @@ public class Rabbit extends Species implements Cloneable {
         } else {
             int calories = (int) (this.Mass / 10);
             while (calories > 0) {
-                Plant prey = null;
+                Rabbit prey = null;
                 for (Species target : this.environment.getSpecimens()) {
-                    if (target.getClass() == Plant.class && this.environment.getDeadSpecimens().contains(target) == false) {
-                        prey = (Plant) target;
+                    if (target.getClass() == Rabbit.class && this.environment.getDeadSpecimens().contains(target) == false) {
+                        prey = (Rabbit) target;
                         if (this.toxinresistance * this.Mass >= prey.getToxicity() * prey.getMass()) {
                             synchronized (this.environment.getDeadSpecimens()) {
                                 this.environment.getDeadSpecimens().add(prey);
@@ -74,7 +74,7 @@ public class Rabbit extends Species implements Cloneable {
     }
 
     /**
-     * Clones the rabbit with a chance for mutation.
+     * Clones the fox with a chance for mutation.
      *
      * @return
      * @throws CloneNotSupportedException
@@ -102,7 +102,7 @@ public class Rabbit extends Species implements Cloneable {
     }
 
     /**
-     * Sets the mass of the rabbit.
+     * Sets the mass of the fox.
      *
      * @param Mass
      */
@@ -111,7 +111,7 @@ public class Rabbit extends Species implements Cloneable {
     }
 
     /**
-     * Returns the mass of the rabbit.
+     * Returns the mass of the fox.
      *
      * @return
      */
@@ -121,7 +121,7 @@ public class Rabbit extends Species implements Cloneable {
     }
 
     /**
-     * Returns the environment the rabbit lives in.
+     * Returns the environment the fox lives in.
      *
      * @return
      */
@@ -130,7 +130,7 @@ public class Rabbit extends Species implements Cloneable {
     }
 
     /**
-     * Sets the environment the rabbit lives in.
+     * Sets the environment the fox lives in.
      *
      * @param environment
      */
@@ -139,7 +139,7 @@ public class Rabbit extends Species implements Cloneable {
     }
 
     /**
-     * Gets the rabbit's chance of mutation.
+     * Gets the fox's chance of mutation.
      *
      * @return
      */
@@ -148,7 +148,7 @@ public class Rabbit extends Species implements Cloneable {
     }
 
     /**
-     * Sets the rabbit's chance of mutation.
+     * Sets the fox's chance of mutation.
      *
      * @param mutation
      */
@@ -157,7 +157,7 @@ public class Rabbit extends Species implements Cloneable {
     }
 
     /**
-     * Gets the toxin resistance of the rabbit.
+     * Gets the toxin resistance of the fox.
      *
      * @return
      */
@@ -166,7 +166,7 @@ public class Rabbit extends Species implements Cloneable {
     }
 
     /**
-     * Sets the toxin resistance of the rabbit.
+     * Sets the toxin resistance of the fox.
      *
      * @param toxinresistance
      */

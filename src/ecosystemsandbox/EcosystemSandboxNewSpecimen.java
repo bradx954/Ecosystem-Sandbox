@@ -32,6 +32,7 @@ public class EcosystemSandboxNewSpecimen extends java.awt.Dialog {
 
         cbSpecies = new javax.swing.JComboBox<>();
         btnSubmit = new java.awt.Button();
+        spSpecies = new javax.swing.JSpinner();
 
         setPreferredSize(new java.awt.Dimension(200, 100));
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -49,6 +50,7 @@ public class EcosystemSandboxNewSpecimen extends java.awt.Dialog {
             }
         });
         add(btnSubmit, java.awt.BorderLayout.SOUTH);
+        add(spSpecies, java.awt.BorderLayout.NORTH);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -62,21 +64,23 @@ public class EcosystemSandboxNewSpecimen extends java.awt.Dialog {
     }//GEN-LAST:event_closeDialog
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
-        Species newSpecies = null;
-        switch(this.cbSpecies.getSelectedItem().toString())
-        {
-            case "Plant":
-                newSpecies = new Plant(this.ecosystem);
-                break;
-            case "Rabbit":
-                newSpecies = new Rabbit(this.ecosystem);
-                break;
-            case "Fox":
-                newSpecies = new Fox(this.ecosystem);
-                break;
-            default:
+        int x = 0;
+        for (x = 0; x < (Integer) this.spSpecies.getValue(); x++) {
+            Species newSpecies = null;
+            switch (this.cbSpecies.getSelectedItem().toString()) {
+                case "Plant":
+                    newSpecies = new Plant(this.ecosystem);
+                    break;
+                case "Rabbit":
+                    newSpecies = new Rabbit(this.ecosystem);
+                    break;
+                case "Fox":
+                    newSpecies = new Fox(this.ecosystem);
+                    break;
+                default:
+            }
+            this.ecosystem.addSpecies(newSpecies);
         }
-        this.ecosystem.addSpecies(newSpecies);
         setVisible(false);
         dispose();
     }//GEN-LAST:event_btnSubmitActionPerformed
@@ -86,5 +90,6 @@ public class EcosystemSandboxNewSpecimen extends java.awt.Dialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Button btnSubmit;
     private javax.swing.JComboBox<String> cbSpecies;
+    private javax.swing.JSpinner spSpecies;
     // End of variables declaration//GEN-END:variables
 }

@@ -50,6 +50,8 @@ public class EcosystemSandboxNewSpecimen extends java.awt.Dialog {
             }
         });
         add(btnSubmit, java.awt.BorderLayout.SOUTH);
+
+        spSpecies.setValue(1);
         add(spSpecies, java.awt.BorderLayout.NORTH);
 
         pack();

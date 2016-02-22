@@ -3,6 +3,10 @@
  */
 package ecosystemsandbox;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -42,7 +46,9 @@ public class Rabbit extends Species implements Cloneable {
             int calories = (int) (this.Mass / 10);
             while (calories > 0) {
                 Plant prey = null;
-                for (Species target : this.environment.getSpecimens()) {
+                List<Species> list = new ArrayList(this.environment.getSpecimens());
+                Collections.shuffle(list);
+                for (Species target : list) {
                     if (target.getClass() == Plant.class && this.environment.getDeadSpecimens().contains(target) == false) {
                         prey = (Plant) target;
                         if (this.toxinresistance * this.Mass >= prey.getToxicity() * prey.getMass()) {

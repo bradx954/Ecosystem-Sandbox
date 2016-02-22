@@ -54,6 +54,7 @@ public class EcosystemSandboxNew extends java.awt.Dialog {
 
         txtArea.setColumns(7);
         txtArea.setName("txtArea"); // NOI18N
+        txtArea.setNextFocusableComponent(txtHeight);
         txtArea.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtAreaActionPerformed(evt);
@@ -69,6 +70,7 @@ public class EcosystemSandboxNew extends java.awt.Dialog {
 
         txtHeight.setColumns(5);
         txtHeight.setName("txtHeight"); // NOI18N
+        txtHeight.setNextFocusableComponent(jButton1);
         txtHeight.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtHeightActionPerformed(evt);

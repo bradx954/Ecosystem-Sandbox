@@ -21,8 +21,10 @@ public class EcosystemSandboxMain extends java.awt.Frame {
      */
     public EcosystemSandboxMain(Ecosystem ecosystem) {
         initComponents();
+        this.setTitle("Ecosystem Sandbox - Main");
         this.ecosystem = ecosystem;
         this.slidClone.setValue(this.ecosystem.getClone());
+        this.slidMutation.setValue(this.ecosystem.getMutation());
         this.updateLabels();
         this.updateList();
     }
@@ -86,6 +88,8 @@ public class EcosystemSandboxMain extends java.awt.Frame {
         lblTicksValue = new javax.swing.JLabel();
         slidClone = new javax.swing.JSlider();
         lblClone = new javax.swing.JLabel();
+        lblMutationChance = new javax.swing.JLabel();
+        slidMutation = new javax.swing.JSlider();
         btnCycle = new java.awt.Button();
         txtDetails = new java.awt.TextArea();
         tabSpecimens = new javax.swing.JTabbedPane();
@@ -143,7 +147,7 @@ public class EcosystemSandboxMain extends java.awt.Frame {
         lblOxygen.setText("Oxygen(grams per m3)");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 7;
         gridBagConstraints.gridwidth = 2;
         plDetails.add(lblOxygen, gridBagConstraints);
 
@@ -152,14 +156,14 @@ public class EcosystemSandboxMain extends java.awt.Frame {
         lblOxygenValue.setText("big double value");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 8;
         gridBagConstraints.gridwidth = 2;
         plDetails.add(lblOxygenValue, gridBagConstraints);
 
         lblCarbonDioxide.setText("CarbonDioxide(grams per m3)");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridy = 9;
         gridBagConstraints.gridwidth = 2;
         plDetails.add(lblCarbonDioxide, gridBagConstraints);
 
@@ -168,14 +172,14 @@ public class EcosystemSandboxMain extends java.awt.Frame {
         lblCarbonDioxideValue.setText("big double value");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridy = 10;
         gridBagConstraints.gridwidth = 2;
         plDetails.add(lblCarbonDioxideValue, gridBagConstraints);
 
         lblNitrogen.setText("Nitrogen(grams per m3)");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 9;
+        gridBagConstraints.gridy = 11;
         gridBagConstraints.gridwidth = 2;
         plDetails.add(lblNitrogen, gridBagConstraints);
 
@@ -184,14 +188,14 @@ public class EcosystemSandboxMain extends java.awt.Frame {
         lblNitrogenValue.setText("big double value");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 10;
+        gridBagConstraints.gridy = 12;
         gridBagConstraints.gridwidth = 2;
         plDetails.add(lblNitrogenValue, gridBagConstraints);
 
         lblTemperature.setText("Temperature(Celsius)");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 11;
+        gridBagConstraints.gridy = 13;
         gridBagConstraints.gridwidth = 2;
         plDetails.add(lblTemperature, gridBagConstraints);
 
@@ -200,20 +204,20 @@ public class EcosystemSandboxMain extends java.awt.Frame {
         lblTemperatureValue.setText("big double value");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 12;
+        gridBagConstraints.gridy = 14;
         gridBagConstraints.gridwidth = 2;
         plDetails.add(lblTemperatureValue, gridBagConstraints);
 
         lblTicks.setText("Ticks:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 13;
+        gridBagConstraints.gridy = 15;
         plDetails.add(lblTicks, gridBagConstraints);
 
         lblTicksValue.setText("ticks");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 13;
+        gridBagConstraints.gridy = 15;
         plDetails.add(lblTicksValue, gridBagConstraints);
 
         slidClone.setMajorTickSpacing(1);
@@ -239,6 +243,32 @@ public class EcosystemSandboxMain extends java.awt.Frame {
         gridBagConstraints.gridy = 3;
         gridBagConstraints.gridwidth = 2;
         plDetails.add(lblClone, gridBagConstraints);
+
+        lblMutationChance.setText("Mutation Chance(1 in x)");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 2;
+        plDetails.add(lblMutationChance, gridBagConstraints);
+
+        slidMutation.setMajorTickSpacing(1);
+        slidMutation.setMaximum(10);
+        slidMutation.setMinimum(1);
+        slidMutation.setMinorTickSpacing(1);
+        slidMutation.setPaintLabels(true);
+        slidMutation.setPaintTicks(true);
+        slidMutation.setSnapToTicks(true);
+        slidMutation.setValue(1);
+        slidMutation.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                slidMutationStateChanged(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 2;
+        plDetails.add(slidMutation, gridBagConstraints);
 
         add(plDetails, java.awt.BorderLayout.WEST);
 
@@ -388,6 +418,10 @@ public class EcosystemSandboxMain extends java.awt.Frame {
         this.txtDetails.setText(selected.toString());
     }//GEN-LAST:event_listDeadSpecimensItemStateChanged
 
+    private void slidMutationStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_slidMutationStateChanged
+        this.ecosystem.setMutation(this.slidMutation.getValue());
+    }//GEN-LAST:event_slidMutationStateChanged
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -402,6 +436,7 @@ public class EcosystemSandboxMain extends java.awt.Frame {
     private java.awt.Label lblEcosystem;
     private java.awt.Label lblHeight;
     private java.awt.Label lblHeightValue;
+    private javax.swing.JLabel lblMutationChance;
     private java.awt.Label lblNitrogen;
     private java.awt.Label lblNitrogenValue;
     private java.awt.Label lblOxygen;
@@ -417,6 +452,7 @@ public class EcosystemSandboxMain extends java.awt.Frame {
     private java.awt.MenuItem newSpecimen;
     private java.awt.Panel plDetails;
     private javax.swing.JSlider slidClone;
+    private javax.swing.JSlider slidMutation;
     private javax.swing.JTabbedPane tabSpecimens;
     private java.awt.TextArea txtDetails;
     // End of variables declaration//GEN-END:variables

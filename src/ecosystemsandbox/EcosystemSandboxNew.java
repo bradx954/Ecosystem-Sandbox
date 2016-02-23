@@ -20,6 +20,7 @@ public class EcosystemSandboxNew extends java.awt.Dialog {
     public EcosystemSandboxNew(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setTitle("Ecosystem Sandbox - New Ecosystem");
     }
 
     /**

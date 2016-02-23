@@ -17,6 +17,7 @@ public class EcosystemSandboxNewSpecimen extends java.awt.Dialog {
     public EcosystemSandboxNewSpecimen(java.awt.Frame parent, boolean modal, Ecosystem ecosystem) {
         super(parent, modal);
         initComponents();
+        this.setTitle("Ecosystem Sandbox - New Specimen");
         this.ecosystem = ecosystem;
         this.cbSpecies.addItem(Plant.class.getSimpleName());
         this.cbSpecies.addItem(Rabbit.class.getSimpleName());

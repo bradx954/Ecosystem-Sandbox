@@ -1,1 +1,8 @@
 # Ecosystem-Sandbox
+Ecosystem Sandbox is a Java project for simulating a ecosystem of specimens and how they interact with each other and evolve. The system provides a framework front end for handling the ecosystem object but is not required for running simulations. The ecosystem object contains a Atmosphere object and a collection of Specimen objects as separate entities. 
+
+The Atmosphere object contains information such as the dimensions of the atmosphere and the contents of its gases measured as grams per meters cubed. It Also provides functions such as getTemperature() to simulate the air temperature based on its composition. 
+
+Specimen objects are instances of the abstract class Species. Types of creatures in the ecosystem are implementations of this class. Each sub class has a set of mandatory traits as well as its own unique ones. For example both the Plant class and the Rabbit class have the mass and toxicity trait. The Rabbit class however also has a speed trait for evading instances of the Fox class. Some traits like the speed traits don't actually have a value and are a result of other traits like metabolic rate and mass.
+
+Mutation is something that has a chance to happen when a specimen survives a tick and clones itself.  Most traits have a chance of being effected one way or the other. Even though mutations are totally random some are more persistent than others do the simulated natural selection in the environment. For example there tends to be an arms race between the plants toxicity and the rabbits toxic resistance.

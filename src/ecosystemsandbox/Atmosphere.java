@@ -9,8 +9,6 @@ package ecosystemsandbox;
  * @author Brad Baago
  */
 public class Atmosphere {
-
-    private double Temperature = 20; //The air temperature.
     private int Area; //The volume in m3.
     private double CarbonDioxide; //The amount of grams of carbonDioxide in 1 m3.
     private double Nitrogen; //The amount of grams of Nitrogen in 1 m3.
@@ -37,16 +35,7 @@ public class Atmosphere {
      * @return the value of Temperature
      */
     public double getTemperature() {
-        return Temperature;
-    }
-
-    /**
-     * Set the value of Temperature
-     *
-     * @param Temperature new value of Temperature
-     */
-    public void setTemperature(double Temperature) {
-        this.Temperature = Temperature;
+        return (this.Nitrogen*0.01)+(this.Oxygen*0.01)+(this.CarbonDioxide*0.1);
     }
 
     /**

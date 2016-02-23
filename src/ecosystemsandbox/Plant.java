@@ -38,7 +38,7 @@ public class Plant extends Species implements Cloneable {
             return false;
         } else {
             environment.getAtmosphere().removeCarbonDioxide(0.5 * this.Mass);
-            environment.getAtmosphere().addOxygen(0.3 * this.Mass);
+            environment.getAtmosphere().addOxygen(0.5 * this.Mass * 0.571428571429);
             return true;
         }
     }

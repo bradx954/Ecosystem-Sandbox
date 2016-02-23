@@ -73,8 +73,8 @@ public class Rabbit extends Species implements Cloneable {
                     return false;
                 }
             }
-            environment.getAtmosphere().removeOxygen(0.5 * this.Mass * this.MetabolicRate);
-            environment.getAtmosphere().addCarbonDioxide(0.8 * this.Mass * this.MetabolicRate);
+            environment.getAtmosphere().removeOxygen(0.5 * this.Mass * this.MetabolicRate * 0.571428571429);
+            environment.getAtmosphere().addCarbonDioxide(0.5 * this.Mass * this.MetabolicRate);
             return true;
         }
     }

@@ -17,8 +17,8 @@ import java.util.Random;
 public class Rabbit extends Species implements Cloneable {
 
     private Ecosystem environment; //The environment this rabbit lives in.
-    private int mutation; //The mutation rate of the rabbit.
     private double Mass; //The mass of the rabbit.
+    private double MetabolicRate;//The metabolic rate of the rabbit.
     private int toxinresistance; //The toxin resistance of the rabbit.
 
     /**
@@ -28,9 +28,9 @@ public class Rabbit extends Species implements Cloneable {
      */
     public Rabbit(Ecosystem enviroment) {
         this.environment = enviroment;
-        this.mutation = 10;
         this.Mass = 6000;
         this.toxinresistance = 1;
+        this.MetabolicRate = 1;
     }
 
     /**
@@ -43,11 +43,11 @@ public class Rabbit extends Species implements Cloneable {
         if (environment.getAtmosphere().getOxygen() < 0.02 * this.Mass) {
             return false;
         } else {
-            int calories = (int) (this.Mass / 10);
+            int calories = (int) ((this.Mass / 10)*this.MetabolicRate);
+            List<Species> list = new ArrayList(this.environment.getSpecimens());
+            Collections.shuffle(list);
             while (calories > 0) {
                 Plant prey = null;
-                List<Species> list = new ArrayList(this.environment.getSpecimens());
-                Collections.shuffle(list);
                 for (Species target : list) {
                     if (target.getClass() == Plant.class && this.environment.getDeadSpecimens().contains(target) == false) {
                         prey = (Plant) target;
@@ -73,8 +73,8 @@ public class Rabbit extends Species implements Cloneable {
                     return false;
                 }
             }
-            environment.getAtmosphere().removeOxygen(0.5 * this.Mass);
-            environment.getAtmosphere().addCarbonDioxide(0.8 * this.Mass);
+            environment.getAtmosphere().removeOxygen(0.5 * this.Mass * this.MetabolicRate);
+            environment.getAtmosphere().addCarbonDioxide(0.8 * this.Mass * this.MetabolicRate);
             return true;
         }
     }
@@ -87,8 +87,8 @@ public class Rabbit extends Species implements Cloneable {
      */
     @Override
     protected Object clone1() throws CloneNotSupportedException {
-        if (new Random().nextInt(this.mutation) == 0) {
-            switch (new Random().nextInt(2)) {
+        if (new Random().nextInt(this.environment.getMutation()) == 0) {
+            switch (new Random().nextInt(3)) {
                 case 0:
                     int randomNum = new Random().nextInt((int) (this.Mass/10)) - (int) (this.Mass/5);
                     if (this.Mass + randomNum > 0) {
@@ -99,6 +99,12 @@ public class Rabbit extends Species implements Cloneable {
                     int randomNum2 = new Random().nextInt(3) - 1;
                     if (randomNum2 + this.toxinresistance > 0) {
                         this.toxinresistance += randomNum2;
+                    }
+                    break;
+                case 2:
+                    double randomNum3 = (new Random().nextInt(300) - 100)/100.0;
+                    if (randomNum3 + this.MetabolicRate > 0) {
+                        this.MetabolicRate += randomNum3;
                     }
                     break;
                 default:
@@ -145,24 +151,6 @@ public class Rabbit extends Species implements Cloneable {
     }
 
     /**
-     * Gets the rabbit's chance of mutation.
-     *
-     * @return
-     */
-    public int getMutation() {
-        return mutation;
-    }
-
-    /**
-     * Sets the rabbit's chance of mutation.
-     *
-     * @param mutation
-     */
-    public void setMutation(int mutation) {
-        this.mutation = mutation;
-    }
-
-    /**
      * Gets the toxin resistance of the rabbit.
      *
      * @return
@@ -185,12 +173,17 @@ public class Rabbit extends Species implements Cloneable {
         String output = null;
         output="Mass: "+this.Mass+"\n";
         output+="Toxic Resistance: "+this.toxinresistance+"\n";
-        output+="Mutation Chance: 1/"+this.mutation+"\n";
+        output+="Metabolic Rate: "+this.MetabolicRate+"\n";
+        output+="Speed: "+this.getSpeed()+"\n";
         return output;
     }
     @Override
     public int getToxicity()
     {
         return 0;
+    }
+    public double getSpeed()
+    {
+        return this.Mass*this.MetabolicRate;
     }
 }

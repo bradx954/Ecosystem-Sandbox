@@ -21,6 +21,7 @@ public class Ecosystem {
     private int Area; //The size in m2 of the ecosysem.
     private Atmosphere Atmosphere; //The atmosphere of the ecosystem.
     private int clone; //The 1/x chance of cloning a species each tick.
+    private int mutation; //The 1/x chance of dna mutation when cloning.
     private int nextID = 1; //The next id to give to a new specimen.
     private int ticks = 0;
     private Collection<Species> Specimens = new ArrayList<Species>(); //The collection of specimens residing in the ecosystem.
@@ -35,6 +36,7 @@ public class Ecosystem {
         this.Area = Area;
         this.Atmosphere = new Atmosphere(50, 900, 250, Area * Height);
         this.clone = 5;
+        this.mutation = 2;
     }
 
     /**
@@ -155,7 +157,13 @@ public class Ecosystem {
     public Collection<Species> getDeadSpecimens() {
         return deadSpecimens;
     }
-    
-    
+
+    public int getMutation() {
+        return mutation;
+    }
+
+    public void setMutation(int mutation) {
+        this.mutation = mutation;
+    }
     
 }

@@ -13,7 +13,6 @@ import java.util.Random;
 public class Plant extends Species implements Cloneable {
 
     private Ecosystem environment; //The environment this plant lives in.
-    private int mutation; //The 1/x chance this plant mutates on cloning.
     private double Mass; //The mass of the plant.
     private int toxicity; //The toxicity of the plant.
 
@@ -24,7 +23,6 @@ public class Plant extends Species implements Cloneable {
      */
     public Plant(Ecosystem enviroment) {
         this.environment = enviroment;
-        this.mutation = 10;
         this.Mass = 500;
         this.toxicity = 0;
     }
@@ -53,7 +51,7 @@ public class Plant extends Species implements Cloneable {
      */
     @Override
     protected Object clone1() throws CloneNotSupportedException {
-        if (new Random().nextInt(this.mutation) == 0) {
+        if (new Random().nextInt(this.environment.getMutation()) == 0) {
             switch (new Random().nextInt(2)) {
                 case 0:
                     int randomNum = new Random().nextInt((int) (this.Mass/10)) - (int) (this.Mass/5);
@@ -111,24 +109,6 @@ public class Plant extends Species implements Cloneable {
     }
 
     /**
-     * Gets the plant's rate of mutation.
-     *
-     * @return
-     */
-    public int getMutation() {
-        return mutation;
-    }
-
-    /**
-     * Sets the plant's rate of mutation.
-     *
-     * @param mutation
-     */
-    public void setMutation(int mutation) {
-        this.mutation = mutation;
-    }
-
-    /**
      * Gets the plant's toxicity.
      *
      * @return
@@ -152,7 +132,6 @@ public class Plant extends Species implements Cloneable {
         String output = null;
         output="Mass: "+this.Mass+"\n";
         output+="Toxicity: "+this.toxicity+"\n";
-        output+="Mutation Chance: 1/"+this.mutation+"\n";
         return output;
     }
 }
